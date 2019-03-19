@@ -6,7 +6,18 @@ from django.shortcuts import render
 
 
 # Create your views here.
+from gis.models import Articles
+
+
 def home(request):
-    return render(request, 'gis/home.html')
+    articles = Articles.objects.all()
+    context = {
+        'articles': articles
+    }
+    return render(request, 'gis/home.html', context)
+    #return render(request, 'gis/home.html')
     # return HttpResponse("Hello world")
 
+
+def about(request):
+    return render(request, 'gis/about.html')
