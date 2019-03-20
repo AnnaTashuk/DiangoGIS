@@ -1,31 +1,38 @@
 {% extends 'gis/base.html' %}
 
 {% block title %}
-   Map
+    ArgGis Online on localhost
 {% endblock %}
 
+{%  block maphead %}
+<link rel="stylesheet" href="https://js.arcgis.com/4.10/esri/css/main.css">
+
+<script src="https://js.arcgis.com/4.10/"></script>
+
+<script>
+require([
+  "esri/Map",
+  "esri/views/MapView",
+    "esri/widgets/Home"
+], function(Map, MapView, Home){
+  var map = new Map({
+    basemap: "streets"
+  });
+  var view = new MapView({
+    container: "viewDiv",  // Reference to the scene div created in step 5
+    map: map,  // Reference to the map object created before the scene
+    zoom: 6,  // Sets zoom level based on level of detail (LOD)
+    center: [30.540364,50.445836]  // Sets center point of view using longitude,latitude
+  });
+  var homeBtn = new Home({
+      view: view
+  });
+   // Add the home button to the top left corner of the view
+    view.ui.add(homeBtn, "top-left");
+});
+</script>
+{% endblock  %}
+
 {% block content %}
-
-      <h3>Map</h3>
-    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet beatae delectus eaque eligendi enim labore
-        maiores minima quae quidem voluptatum! Aspernatur error impedit inventore perferendis, quia sint sit soluta
-        sunt?
-    </div>
-    <div>A delectus distinctio eum fugiat hic, incidunt, molestiae nesciunt nobis perferendis provident, reiciendis rem
-        ut vitae! Corporis cupiditate distinctio dolore, doloremque eaque facere, iusto officia quasi quo quos suscipit
-        tenetur.
-    </div>
-    <div>Accusantium cupiditate eius est eum explicabo fugit id in inventore laudantium nam numquam obcaecati pariatur
-        perferendis quam recusandae reiciendis repellendus unde veritatis, vitae voluptate! Impedit, porro quisquam.
-        Dolore, necessitatibus rerum!
-    </div>
-    <div>Debitis dicta dignissimos dolor dolorem error numquam quasi quibusdam recusandae repudiandae voluptatem.
-        Eligendi eos id laudantium molestias nisi perspiciatis vero? Aliquid doloremque dolores ducimus ex minima porro
-        similique unde vero!
-    </div>
-    <div>Exercitationem perspiciatis, quibusdam! Accusamus accusantium ad alias aliquid animi autem, deserunt dicta ea
-        earum enim, fugiat harum laudantium molestias natus possimus qui quis repudiandae saepe velit, veniam.
-        Consequatur, expedita, ipsam?
-    </div>
-
+    <div id="viewDiv" style="height: 700px !important"></div>
 {% endblock %}
