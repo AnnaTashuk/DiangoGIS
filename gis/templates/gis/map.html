@@ -13,8 +13,9 @@
 require([
   "esri/Map",
   "esri/views/MapView",
-    "esri/widgets/Home"
-], function(Map, MapView, Home){
+    "esri/widgets/Home",
+    "esri/widgets/Compass"
+], function(Map, MapView, Home,Compass){
   var map = new Map({
     basemap: "streets"
   });
@@ -29,7 +30,17 @@ require([
   });
    // Add the home button to the top left corner of the view
     view.ui.add(homeBtn, "top-left");
+
+   var compassWidget = new Compass({
+       view: view
+   });
+   // Add the Compass widget to the top left corner of the view
+    view.ui.add(compassWidget, "top-right");
+
+
 });
+
+
 </script>
 {% endblock  %}
 
